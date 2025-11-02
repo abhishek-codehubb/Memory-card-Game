@@ -1,0 +1,247 @@
+:root {
+  --bg: #071226;
+  --panel: #071a2a;
+  --glass: rgba(255, 255, 255, 0.04);
+  --muted: #9fb0c8;
+  --accent: #7c3aed;
+  --accent2: #06b6d4;
+  --card-radius: 12px;
+  --card-w: calc(min(120px, 14vw));
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: radial-gradient(
+      800px 400px at 10% 10%,
+      rgba(124, 58, 237, 0.12),
+      transparent
+    ),
+    linear-gradient(180deg, #051026 0%, #071226 100%);
+  color: #e6f0fb;
+  padding: 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.h1 {
+  font-size: 20px;
+  margin: 0;
+}
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.ghost {
+  background: transparent;
+}
+.small {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  margin-top: 16px;
+}
+.panel {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  padding: 14px;
+  border-radius: 14px;
+}
+.board-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.board {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  align-content: center;
+  padding: 12px;
+  border-radius: 12px;
+  min-height: 220px;
+}
+
+.board.easy {
+  grid-template-columns: repeat(4, var(--card-w));
+}
+.board.medium {
+  grid-template-columns: repeat(6, calc(min(90px, 11vw)));
+}
+.board.hard {
+  grid-template-columns: repeat(8, calc(min(72px, 9vw)));
+}
+
+.card {
+  width: var(--card-w);
+  height: var(--card-w);
+  perspective: 900px;
+  border-radius: var(--card-radius);
+  position: relative;
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 450ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  border-radius: inherit;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+}
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  border-radius: inherit;
+}
+.face.back {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+}
+.face.front {
+  transform: rotateY(180deg);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.01)
+  );
+}
+.face img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.matched .card-inner {
+  transform: scale(1.02);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.stats {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.stat {
+  background: var(--panel);
+  padding: 8px 10px;
+  border-radius: 10px;
+  min-width: 110px;
+  text-align: center;
+}
+.stat small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+.stat strong {
+  display: block;
+}
+
+.progress-wrap {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: 0%;
+}
+
+.footer {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 6, 23, 0.6);
+  z-index: 99;
+}
+.modal-panel {
+  background: #081826;
+  padding: 18px;
+  border-radius: 12px;
+  width: 420px;
+}
+
+.confetti {
+  position: fixed;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+}
+
+.leaderboard {
+  max-height: 220px;
+  overflow: auto;
+}
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
