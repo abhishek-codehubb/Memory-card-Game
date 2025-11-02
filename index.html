@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Memory Match Game</title>
+    <meta
+      name="description"
+      content="Memory Card Game Pro+ — image-based, animated, leaderboard, themes, responsive"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="title">
+          <h2 class="h1">Memory Match — (Made by Abhishek)</h2>
+        </div>
+        <div class="controls">
+          <select id="levelSelect" class="btn">
+            <option value="easy">Easy — 4×4</option>
+            <option value="medium" selected>Medium — 6×6</option>
+          </select>
+          <button id="newBtn" class="btn">New Game</button>
+          <button id="hintBtn" class="btn ghost">Hint</button>
+          <button id="previewBtn" class="btn ghost">Preview</button>
+        </div>
+      </div>
+
+      <div class="layout">
+        <main>
+          <div class="panel board-wrap">
+            <div class="stats">
+              <div class="stat">
+                <small>Time</small><strong id="time">00:00</strong>
+              </div>
+              <div class="stat">
+                <small>Moves</small><strong id="moves">0</strong>
+              </div>
+              <div class="stat">
+                <small>Matches</small><strong id="matches">0</strong>
+              </div>
+            </div>
+
+            <div class="progress-wrap">
+              <div id="progress" class="progress"></div>
+            </div>
+
+            <div
+              id="board"
+              class="board medium"
+              aria-live="polite"
+              role="grid"
+            ></div>
+            <div class="footer small">
+              Tip: Use keyboard (Tab + Enter / Space) to flip when focused •
+              Press <strong>R</strong> to shuffle
+            </div>
+          </div>
+        </main>
+
+        <aside>
+          <div class="panel">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <div>
+                <strong>Leaderboard</strong>
+                <div class="small">Best times (local)</div>
+              </div>
+              <div>
+                <button id="clearScores" class="btn ghost">Clear</button>
+              </div>
+            </div>
+            <div
+              id="leaderList"
+              class="leaderboard small"
+              style="margin-top: 10px"
+            >
+              No records yet
+            </div>
+            <hr
+              style="
+                margin: 10px 0;
+                border: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.03);
+              "
+            />
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div id="winModal" class="modal" style="display: none">
+      <div class="modal-panel">
+        <h3>🎉 You Won!</h3>
+        <p class="small">
+          Time: <strong id="finalTime">00:00</strong> • Moves:
+          <strong id="finalMoves">0</strong>
+        </p>
+        <div
+          style="
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 12px;
+          "
+        >
+          <button id="playAgain" class="btn">Play Again</button>
+          <button id="closeWin" class="btn ghost">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="confettiCanvas" class="confetti"></canvas>
+    <script src="script.js"></script>
+  </body>
+</html>
